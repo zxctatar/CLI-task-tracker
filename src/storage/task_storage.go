@@ -14,6 +14,12 @@ func NewStorage(tasks []*task.Task) *TaskStorage {
 	return &TaskStorage{tasks, nextId}
 }
 
+func (ts *TaskStorage) AddTask(title string, dateTime string) {
+	newTask := task.NewTask(ts.nextId, title, dateTime, task.NotStarted)
+	ts.tasks = append(ts.tasks, newTask)
+	ts.nextId++
+}
+
 func findLastId(tasks []*task.Task) int {
 	var maxId int = 0
 
