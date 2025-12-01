@@ -18,3 +18,7 @@ type Task struct {
 func NewTask(id int, title string, dateTime string, stat Status) *Task {
 	return &Task{id, title, dateTime, stat}
 }
+
+func (t* Task) GetId() int {
+	return t.Id
+}
