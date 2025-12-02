@@ -1,8 +1,11 @@
 package command
 
-import "CLI-task-tracker/validator"
+import (
+	"CLI-task-tracker/validator"
+	"errors"
+)
 
-var ErrExit error
+var ErrExit error = errors.New("exit")
 
 type ExitCommand struct {
 	name string
