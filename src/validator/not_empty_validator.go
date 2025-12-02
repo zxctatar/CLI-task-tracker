@@ -6,7 +6,7 @@ type NotEmptyValidator struct {}
 
 func (nev *NotEmptyValidator) Check(args []string) error {
 	if len(args) == 0 {
-		return errors.New("empty input")
+		return errors.New("the command is waiting for arguments")
 	}
 	return nil
 }
