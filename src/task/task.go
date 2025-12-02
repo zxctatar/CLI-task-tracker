@@ -30,3 +30,7 @@ func (t* Task) GetTitle() string {
 func (t* Task) GetDateTime() string {
 	return t.DateTime
 }
+
+func (t* Task) GetStatus() Status {
+	return t.Stat
+}
