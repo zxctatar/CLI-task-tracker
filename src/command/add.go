@@ -13,9 +13,9 @@ type AddCommand struct {
 	val validator.Validator
 }
 
-func NewAddCommand(storage *storage.TaskStorage, val validator.Validator) *AddCommand {
+func NewAddCommand(stor *storage.TaskStorage, val validator.Validator) *AddCommand {
 	name := "add"
-	return &AddCommand{name, storage, val}
+	return &AddCommand{name, stor, val}
 }
 
 func (ac *AddCommand) GetName() string {
