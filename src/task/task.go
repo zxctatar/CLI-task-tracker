@@ -22,3 +22,11 @@ func NewTask(id int, title string, dateTime string, stat Status) *Task {
 func (t* Task) GetId() int {
 	return t.Id
 }
+
+func (t* Task) GetTitle() string {
+	return t.Title
+}
+
+func (t* Task) GetDateTime() string {
+	return t.DateTime
+}
