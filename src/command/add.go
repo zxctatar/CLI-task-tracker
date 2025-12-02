@@ -2,6 +2,7 @@ package command
 
 import (
 	"CLI-task-tracker/storage"
+	"CLI-task-tracker/validator"
 	"strings"
 	"time"
 )
@@ -9,15 +10,20 @@ import (
 type AddCommand struct {
 	name string
 	stor *storage.TaskStorage
+	val validator.Validator
 }
 
-func NewAddCommand(storage *storage.TaskStorage) *AddCommand {
+func NewAddCommand(storage *storage.TaskStorage, val validator.Validator) *AddCommand {
 	name := "add"
-	return &AddCommand{name, storage}
+	return &AddCommand{name, storage, val}
 }
 
 func (ac *AddCommand) GetName() string {
 	return ac.name
+}
+
+func (ac *AddCommand) GetValidator() validator.Validator {
+	return ac.val
 }
 
 func (ac *AddCommand) Execute(args []string) error {
