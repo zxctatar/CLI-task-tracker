@@ -2,6 +2,15 @@ package task
 
 type Status int
 
+func (s Status) String() string {
+	switch s {
+	case 0: return "NotStarted "
+	case 1: return "Started"
+	case 2: return "Done"
+	default: return "Unknown"
+	}
+}
+
 const (
 	NotStarted Status = iota
 	Started
