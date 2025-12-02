@@ -9,7 +9,7 @@ type TaskStorage struct {
 	nextId int
 }
 
-func NewStorage(tasks []*task.Task) *TaskStorage {
+func NewTaskStorage(tasks []*task.Task) *TaskStorage {
 	nextId := findLastId(tasks)
 	return &TaskStorage{tasks, nextId}
 }
