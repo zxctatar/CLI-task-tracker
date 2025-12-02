@@ -20,6 +20,10 @@ func (ts *TaskStorage) AddTask(title string, dateTime string) {
 	ts.nextId++
 }
 
+func (ts *TaskStorage) GetTasks() []*task.Task {
+	return ts.tasks
+}
+
 func findLastId(tasks []*task.Task) int {
 	var maxId int = 0
 
