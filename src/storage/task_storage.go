@@ -16,8 +16,8 @@ func NewTaskStorage(tasks []*task.Task) *TaskStorage {
 	return &TaskStorage{tasks, nextId}
 }
 
-func (ts *TaskStorage) AddTask(title string, dateTime string) {
-	newTask := task.NewTask(ts.nextId, title, dateTime, dateTime, task.NotStarted)
+func (ts *TaskStorage) AddTask(description string, createdTime string) {
+	newTask := task.NewTask(ts.nextId, description, createdTime, createdTime, task.NotStarted)
 	ts.tasks = append(ts.tasks, newTask)
 	ts.nextId++
 }
