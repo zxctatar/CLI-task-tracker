@@ -20,12 +20,13 @@ const (
 type Task struct {
 	Id int `json:"id"`
 	Title string `json:"title"`
-	DateTime string `json:"dateTime"`
+	CreatedTime string `json:"dateTime"`
+	LastUpdateTime string `json:"lastUpdate"`
 	Stat Status `json:"status"`
 }
 
-func NewTask(id int, title string, dateTime string, stat Status) *Task {
-	return &Task{id, title, dateTime, stat}
+func NewTask(id int, title string, createdTime string, lastUpdateTime string, stat Status) *Task {
+	return &Task{id, title, createdTime, lastUpdateTime, stat}
 }
 
 func (t* Task) GetId() int {
@@ -36,8 +37,12 @@ func (t* Task) GetTitle() string {
 	return t.Title
 }
 
-func (t* Task) GetDateTime() string {
-	return t.DateTime
+func (t* Task) GetCreatedTime() string {
+	return t.CreatedTime
+}
+
+func (t* Task) GetLastUpdateTime() string {
+	return t.LastUpdateTime
 }
 
 func (t* Task) GetStatus() Status {
