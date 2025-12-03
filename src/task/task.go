@@ -4,7 +4,7 @@ type Status int
 
 func (s Status) String() string {
 	switch s {
-	case 0: return "NotStarted "
+	case 0: return "Not started "
 	case 1: return "Started"
 	case 2: return "Done"
 	default: return "Unknown"
@@ -19,7 +19,7 @@ const (
 
 type Task struct {
 	Id int `json:"id"`
-	Title string `json:"title"`
+	Description string `json:"title"`
 	CreatedTime string `json:"dateTime"`
 	LastUpdateTime string `json:"lastUpdate"`
 	Stat Status `json:"status"`
@@ -33,8 +33,8 @@ func (t *Task) GetId() int {
 	return t.Id
 }
 
-func (t *Task) GetTitle() string {
-	return t.Title
+func (t *Task) GetDescription() string {
+	return t.Description
 }
 
 func (t *Task) GetCreatedTime() string {
@@ -49,8 +49,8 @@ func (t *Task) GetStatus() Status {
 	return t.Stat
 }
 
-func (t *Task) SetTitle(newTitle string) {
-	t.Title = newTitle
+func (t *Task) SetDescription(newDescription string) {
+	t.Description = newDescription
 }
 
 func (t *Task) SetLastUpdateTime(newLastUpdateTime string) {
