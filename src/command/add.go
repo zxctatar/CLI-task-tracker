@@ -2,6 +2,7 @@ package command
 
 import (
 	"CLI-task-tracker/storage"
+	"CLI-task-tracker/utils"
 	"CLI-task-tracker/validator"
 	"strings"
 	"time"
@@ -27,9 +28,7 @@ func (ac *AddCommand) GetValidator() validator.Validator {
 }
 
 func (ac *AddCommand) Execute(args []string) error {
-	currentTime := time.Now()
-	format := "02.01.2006 15:04"
-	formattedDateTime := currentTime.Format(format)
+	formattedDateTime := utils.FormattedCurrentTime()
 
 	var title string = strings.Join(args, " ")
 
