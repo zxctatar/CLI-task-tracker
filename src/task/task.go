@@ -29,34 +29,42 @@ func NewTask(id int, title string, createdTime string, lastUpdateTime string, st
 	return &Task{id, title, createdTime, lastUpdateTime, stat}
 }
 
-func (t* Task) GetId() int {
+func (t *Task) GetId() int {
 	return t.Id
 }
 
-func (t* Task) GetTitle() string {
+func (t *Task) GetTitle() string {
 	return t.Title
 }
 
-func (t* Task) GetCreatedTime() string {
+func (t *Task) GetCreatedTime() string {
 	return t.CreatedTime
 }
 
-func (t* Task) GetLastUpdateTime() string {
+func (t *Task) GetLastUpdateTime() string {
 	return t.LastUpdateTime
 }
 
-func (t* Task) GetStatus() Status {
+func (t *Task) GetStatus() Status {
 	return t.Stat
 }
 
-func (t* Task) SetTitle(newTitle string) {
+func (t *Task) SetTitle(newTitle string) {
 	t.Title = newTitle
 }
 
-func (t* Task) SetLastUpdateTime(newLastUpdateTime string) {
+func (t *Task) SetLastUpdateTime(newLastUpdateTime string) {
 	t.LastUpdateTime = newLastUpdateTime
 }
 
-func (t* Task) StartTask() {
+func (t *Task) StartTask() {
 	t.Stat = Started
+}
+
+func (t *Task) DoneTask() {
+	t.Stat = Done
+}
+
+func (t *Task) CancelTask() {
+	t.Stat = NotStarted
 }
