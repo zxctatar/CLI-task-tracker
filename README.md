@@ -37,7 +37,7 @@ go build
 ```bash
 add <task description>                      - Add a new task.
 update <task id> <new task description>     - Update the description of a task.
-list                                        - Show all tasks.
+list / list<argument>                       - Show tasks. Arguments: not-started, started, done
 delete <task id>                            - Delete a task.
 start <task id>                             - Start a task.
 done <task id>                              - Mark a task as done.
