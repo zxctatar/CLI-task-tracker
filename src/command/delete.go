@@ -18,7 +18,7 @@ type DeleteCommand struct {
 
 func NewDeleteCommand(stor *storage.TaskStorage, val validator.Validator) *DeleteCommand {
 	name := "delete"
-	description := "Delete task."
+	description := "Delete a task."
 	usage := "delete <task id>"
 	example := "delete 1"
 	return &DeleteCommand{name, stor, val, description, usage, example}
