@@ -48,3 +48,11 @@ func (t* Task) GetLastUpdateTime() string {
 func (t* Task) GetStatus() Status {
 	return t.Stat
 }
+
+func (t* Task) SetTitle(newTitle string) {
+	t.Title = newTitle
+}
+
+func (t* Task) SetLastUpdateTime(newLastUpdateTime string) {
+	t.LastUpdateTime = newLastUpdateTime
+}
