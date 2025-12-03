@@ -14,11 +14,17 @@ type ListCommand struct {
 	name string
 	stor *storage.TaskStorage
 	val validator.Validator
+	description string
+	usage string
+	example string
 }
 
 func NewListCommand(stor *storage.TaskStorage, val validator.Validator) *ListCommand {
 	name := "list"
-	return &ListCommand{name, stor, val}
+	description := "Show all tasks."
+	usage := "list"
+	example := "list"
+	return &ListCommand{name, stor, val, description, usage, example}
 }
 
 func (lc *ListCommand) GetName() string {
@@ -29,6 +35,18 @@ func (lc *ListCommand) GetValidator() validator.Validator {
 	return lc.val
 }
 
+func (lc *ListCommand) GetDescription() string {
+	return lc.description
+}
+
+func (lc *ListCommand) GetUsage() string {
+	return lc.usage
+}
+
+func (lc *ListCommand) GetExample() string {
+	return lc.example
+}
+
 func (lc *ListCommand) Execute(args []string) error {
 	tasks := lc.stor.GetTasks()
 
@@ -36,27 +54,27 @@ func (lc *ListCommand) Execute(args []string) error {
 		return errors.New("no tasks")
 	}
 
-	idLen, titleLen, createdTimeLen, lastUpdateTimeLen, statLen := getFieldSizes(tasks)
+	idLen, descriptionLen, createdTimeLen, lastUpdateTimeLen, statLen := getListFieldSizes(tasks)
 
 	fmt.Println()
 
 	fmt.Printf(
 		"%-*s | %-*s | %-*s | %-*s | %-*s\n",
 		idLen, "ID",
-		titleLen, "Title",
+		descriptionLen, "Description",
 		createdTimeLen, "CreatedTime",
 		statLen, "Status",
 		lastUpdateTimeLen, "LastUpdate",
 	)
 
-	totalWidth := idLen + titleLen + createdTimeLen + statLen + lastUpdateTimeLen + 12
+	totalWidth := idLen + descriptionLen + createdTimeLen + statLen + lastUpdateTimeLen + 12
 	fmt.Println(strings.Repeat("-", totalWidth))
 
 	for _, t := range tasks {
 		fmt.Printf(
 			"%-*d | %-*s | %-*s | %-*s | %-*s\n",
 			idLen, t.GetId(),
-			titleLen, t.GetTitle(),
+			descriptionLen, t.GetDescription(),
 			createdTimeLen, t.GetCreatedTime(),
 			statLen, t.GetStatus().String(),
 			lastUpdateTimeLen, t.GetLastUpdateTime(),
@@ -68,9 +86,9 @@ func (lc *ListCommand) Execute(args []string) error {
 	return nil
 }
 
-func getFieldSizes(tasks []*task.Task) (idLen, titleLen, createdTimeLen, lastUpdateTimeLen, statLen int){
+func getListFieldSizes(tasks []*task.Task) (idLen, descriptionLen, createdTimeLen, lastUpdateTimeLen, statLen int){
 	idLen = 2
-	titleLen = 5
+	descriptionLen = 11
 	createdTimeLen = 10
 	lastUpdateTimeLen = 10
 	statLen = 12
@@ -81,10 +99,10 @@ func getFieldSizes(tasks []*task.Task) (idLen, titleLen, createdTimeLen, lastUpd
 			idLen = len(idStr)
 		}
 		
-		titleRun := []rune(t.GetTitle())
+		descriptionRun := []rune(t.GetDescription())
 
-		if titleLen < len(titleRun) {
-			titleLen = len(titleRun)
+		if descriptionLen < len(descriptionRun) {
+			descriptionLen = len(descriptionRun)
 		}
 
 		dateTimeRun := []rune(t.GetCreatedTime())

@@ -12,11 +12,17 @@ type DoneCommand struct {
 	name string
 	stor *storage.TaskStorage
 	val validator.Validator
+	description string
+	usage string
+	example string
 }
 
 func NewDoneCommand(stor *storage.TaskStorage, val validator.Validator) *DoneCommand {
 	name := "done"
-	return &DoneCommand{name, stor, val}
+	description := "Mark a task as done."
+	usage := "done <task id>"
+	example := "done 1"
+	return &DoneCommand{name, stor, val, description, usage, example}
 }
 
 func (dc *DoneCommand) GetName() string {
@@ -25,6 +31,18 @@ func (dc *DoneCommand) GetName() string {
 
 func (dc *DoneCommand) GetValidator() validator.Validator {
 	return dc.val
+}
+
+func (dc *DoneCommand) GetDescription() string {
+	return dc.description
+}
+
+func (dc *DoneCommand) GetUsage() string {
+	return dc.usage
+}
+
+func (dc *DoneCommand) GetExample() string {
+	return dc.example
 }
 
 func (dc *DoneCommand) Execute(args []string) error {

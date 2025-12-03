@@ -11,11 +11,17 @@ type DeleteCommand struct {
 	name string
 	stor *storage.TaskStorage
 	val validator.Validator
+	description string
+	usage string
+	example string
 }
 
 func NewDeleteCommand(stor *storage.TaskStorage, val validator.Validator) *DeleteCommand {
 	name := "delete"
-	return &DeleteCommand{name, stor, val}
+	description := "Delete task."
+	usage := "delete <task id>"
+	example := "delete 1"
+	return &DeleteCommand{name, stor, val, description, usage, example}
 }
 
 func (dc *DeleteCommand) GetName() string {
@@ -24,6 +30,18 @@ func (dc *DeleteCommand) GetName() string {
 
 func (dc *DeleteCommand) GetValidator() validator.Validator {
 	return dc.val
+}
+
+func (dc *DeleteCommand) GetDescription() string {
+	return dc.description
+}
+
+func (dc *DeleteCommand) GetUsage() string {
+	return dc.usage
+}
+
+func (dc *DeleteCommand) GetExample() string {
+	return dc.example
 }
 
 func (dc *DeleteCommand) Execute(args []string) error {

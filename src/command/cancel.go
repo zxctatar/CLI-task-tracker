@@ -12,11 +12,17 @@ type CancelCommand struct {
 	name string
 	stor *storage.TaskStorage
 	val validator.Validator
+	description string
+	usage string
+	example string
 }
 
 func NewCancelCommand(stor *storage.TaskStorage, val validator.Validator) *CancelCommand {
 	name := "cancel"
-	return &CancelCommand{name, stor, val}
+	description := "Cancel a task and mark it as not started."
+	usage := "cancel <task id>"
+	example := "cancel 1"
+	return &CancelCommand{name, stor, val, description, usage, example}
 }
 
 func (cc *CancelCommand) GetName() string {
@@ -25,6 +31,18 @@ func (cc *CancelCommand) GetName() string {
 
 func (cc *CancelCommand) GetValidator() validator.Validator {
 	return cc.val
+}
+
+func (cc *CancelCommand) GetDescription() string {
+	return cc.description
+}
+
+func (cc *CancelCommand) GetUsage() string {
+	return cc.usage
+}
+
+func (cc *CancelCommand) GetExample() string {
+	return cc.example
 }
 
 func (cc *CancelCommand) Execute(args []string) error {

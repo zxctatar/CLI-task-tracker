@@ -11,11 +11,17 @@ type AddCommand struct {
 	name string
 	stor *storage.TaskStorage
 	val validator.Validator
+	description string
+	usage string
+	example string
 }
 
 func NewAddCommand(stor *storage.TaskStorage, val validator.Validator) *AddCommand {
 	name := "add"
-	return &AddCommand{name, stor, val}
+	description := "Add a new task."
+	usage := "add <task description>"
+	example := "add Buy milk"
+	return &AddCommand{name, stor, val, description, usage, example}
 }
 
 func (ac *AddCommand) GetName() string {
@@ -24,6 +30,18 @@ func (ac *AddCommand) GetName() string {
 
 func (ac *AddCommand) GetValidator() validator.Validator {
 	return ac.val
+}
+
+func (ac *AddCommand) GetDescription() string {
+	return ac.description
+}
+
+func(ac *AddCommand) GetUsage() string {
+	return ac.usage
+}
+
+func(ac *AddCommand) GetExample() string {
+	return ac.example
 }
 
 func (ac *AddCommand) Execute(args []string) error {
