@@ -17,7 +17,7 @@ func NewTaskStorage(tasks []*task.Task) *TaskStorage {
 }
 
 func (ts *TaskStorage) AddTask(title string, dateTime string) {
-	newTask := task.NewTask(ts.nextId, title, dateTime, task.NotStarted)
+	newTask := task.NewTask(ts.nextId, title, dateTime, dateTime, task.NotStarted)
 	ts.tasks = append(ts.tasks, newTask)
 	ts.nextId++
 }
@@ -26,6 +26,17 @@ func (ts *TaskStorage) DeleteTask(id int) error {
 	for index, t := range ts.tasks {
 		if t.GetId() == id {
 			ts.tasks = slices.Delete(ts.tasks, index, index + 1)
+			return nil
+		}
+	}
+	return errors.New("task with this id not found")
+}
+
+func (ts *TaskStorage) UpdateTask(id int, newTitle string, newLastUpdateTime string) error {
+	for _, t := range ts.tasks {
+		if t.GetId() == id {
+			t.SetTitle(newTitle)
+			t.SetLastUpdateTime(newLastUpdateTime)
 			return nil
 		}
 	}
