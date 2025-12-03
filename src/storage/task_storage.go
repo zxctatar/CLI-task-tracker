@@ -2,6 +2,8 @@ package storage
 
 import (
 	"CLI-task-tracker/task"
+	"errors"
+	"slices"
 )
 
 type TaskStorage struct {
@@ -18,6 +20,16 @@ func (ts *TaskStorage) AddTask(title string, dateTime string) {
 	newTask := task.NewTask(ts.nextId, title, dateTime, task.NotStarted)
 	ts.tasks = append(ts.tasks, newTask)
 	ts.nextId++
+}
+
+func (ts *TaskStorage) DeleteTask(id int) error {
+	for index, t := range ts.tasks {
+		if t.GetId() == id {
+			ts.tasks = slices.Delete(ts.tasks, index, index + 1)
+			return nil
+		}
+	}
+	return errors.New("task with this id not found")
 }
 
 func (ts *TaskStorage) GetTasks() []*task.Task {
