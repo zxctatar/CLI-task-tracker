@@ -6,6 +6,7 @@ import (
 	"CLI-task-tracker/validator"
 	"errors"
 	"fmt"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -21,9 +22,9 @@ type ListCommand struct {
 
 func NewListCommand(stor *storage.TaskStorage, val validator.Validator) *ListCommand {
 	name := "list"
-	description := "Show all tasks."
-	usage := "list"
-	example := "list"
+	description := "Show tasks. Arguments: not-started, started, done"
+	usage := "list / list <status>"
+	example := "list / list not-started"
 	return &ListCommand{name, stor, val, description, usage, example}
 }
 
@@ -48,7 +49,20 @@ func (lc *ListCommand) GetExample() string {
 }
 
 func (lc *ListCommand) Execute(args []string) error {
-	tasks := lc.stor.GetTasks()
+	tasks := slices.Clone(lc.stor.GetTasks())
+
+	if len(args) != 0 {		
+		var selected task.Status
+
+		switch args[0] {
+		case "not-started": selected = task.NotStarted
+		case "started": selected = task.Started
+		case "done": selected = task.Done
+		default: return errors.New("invalid argument")
+		}
+
+		tasks = selectTasks(selected, tasks)
+	}
 
 	if len(tasks) == 0 {
 		return errors.New("no tasks")
@@ -56,6 +70,23 @@ func (lc *ListCommand) Execute(args []string) error {
 
 	idLen, descriptionLen, createdTimeLen, lastUpdateTimeLen, statLen := getListFieldSizes(tasks)
 
+	printTasks(idLen, descriptionLen, createdTimeLen, lastUpdateTimeLen, statLen, tasks)
+
+	return nil
+}
+
+func selectTasks(selected task.Status, tasks []*task.Task) []*task.Task{
+	result := []*task.Task{}
+	for _, task := range tasks {
+		if task.GetStatus() == selected{
+			result = append(result, task)
+		}
+	}
+
+	return result
+}
+
+func printTasks(idLen int, descriptionLen int, createdTimeLen int, lastUpdateTimeLen int, statLen int, tasks []*task.Task) {
 	fmt.Println()
 
 	fmt.Printf(
@@ -82,8 +113,6 @@ func (lc *ListCommand) Execute(args []string) error {
 	}
 
 	fmt.Println()
-
-	return nil
 }
 
 func getListFieldSizes(tasks []*task.Task) (idLen, descriptionLen, createdTimeLen, lastUpdateTimeLen, statLen int) {
