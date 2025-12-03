@@ -36,28 +36,30 @@ func (lc *ListCommand) Execute(args []string) error {
 		return errors.New("no tasks")
 	}
 
-	idLen, titleLen, dateTimeLen, statLen := getFieldSizes(tasks)
+	idLen, titleLen, createdTimeLen, lastUpdateTimeLen, statLen := getFieldSizes(tasks)
 
 	fmt.Println()
 
 	fmt.Printf(
-		"%-*s | %-*s | %-*s | %-*s\n",
+		"%-*s | %-*s | %-*s | %-*s | %-*s\n",
 		idLen, "ID",
 		titleLen, "Title",
-		dateTimeLen, "DateTime",
+		createdTimeLen, "CreatedTime",
 		statLen, "Status",
+		lastUpdateTimeLen, "LastUpdate",
 	)
 
-	totalWidth := idLen + titleLen + dateTimeLen + statLen + 9
+	totalWidth := idLen + titleLen + createdTimeLen + statLen + lastUpdateTimeLen + 12
 	fmt.Println(strings.Repeat("-", totalWidth))
 
 	for _, t := range tasks {
 		fmt.Printf(
-			"%-*d | %-*s | %-*s | %-*s\n",
+			"%-*d | %-*s | %-*s | %-*s | %-*s\n",
 			idLen, t.GetId(),
 			titleLen, t.GetTitle(),
-			dateTimeLen, t.GetDateTime(),
+			createdTimeLen, t.GetCreatedTime(),
 			statLen, t.GetStatus().String(),
+			lastUpdateTimeLen, t.GetLastUpdateTime(),
 		)
 	}
 
@@ -66,10 +68,11 @@ func (lc *ListCommand) Execute(args []string) error {
 	return nil
 }
 
-func getFieldSizes(tasks []*task.Task) (idLen, titleLen, dateTimeLen, statLen int){
+func getFieldSizes(tasks []*task.Task) (idLen, titleLen, createdTimeLen, lastUpdateTimeLen, statLen int){
 	idLen = 2
 	titleLen = 5
-	dateTimeLen = 8
+	createdTimeLen = 10
+	lastUpdateTimeLen = 10
 	statLen = 12
 
 	for _, t := range tasks {
@@ -84,10 +87,16 @@ func getFieldSizes(tasks []*task.Task) (idLen, titleLen, dateTimeLen, statLen in
 			titleLen = len(titleRun)
 		}
 
-		dateTimeRun := []rune(t.GetDateTime())
+		dateTimeRun := []rune(t.GetCreatedTime())
 
-		if dateTimeLen < len(dateTimeRun) {
-			dateTimeLen = len(dateTimeRun)
+		if createdTimeLen < len(dateTimeRun) {
+			createdTimeLen = len(dateTimeRun)
+		}
+
+		lastUpdateRun := []rune(t.GetLastUpdateTime())
+
+		if lastUpdateTimeLen < len(lastUpdateRun) {
+			lastUpdateTimeLen = len(lastUpdateRun)
 		}
 	}
 
