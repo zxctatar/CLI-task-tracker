@@ -47,9 +47,9 @@ func (ac *AddCommand) GetExample() string {
 func (ac *AddCommand) Execute(args []string) error {
 	formattedDateTime := utils.FormattedCurrentTime()
 
-	var title string = strings.Join(args, " ")
+	var description string = strings.Join(args, " ")
 
-	ac.stor.AddTask(title, formattedDateTime)
+	ac.stor.AddTask(description, formattedDateTime)
 
 	return nil
 }
