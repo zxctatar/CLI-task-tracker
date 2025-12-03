@@ -51,14 +51,18 @@ func (lc *ListCommand) GetExample() string {
 func (lc *ListCommand) Execute(args []string) error {
 	tasks := slices.Clone(lc.stor.GetTasks())
 
-	if len(args) != 0 {		
+	if len(args) != 0 {
 		var selected task.Status
 
 		switch args[0] {
-		case "not-started": selected = task.NotStarted
-		case "started": selected = task.Started
-		case "done": selected = task.Done
-		default: return errors.New("invalid argument")
+		case "not-started":
+			selected = task.NotStarted
+		case "started":
+			selected = task.Started
+		case "done":
+			selected = task.Done
+		default:
+			return errors.New("invalid argument")
 		}
 
 		tasks = selectTasks(selected, tasks)
@@ -75,10 +79,10 @@ func (lc *ListCommand) Execute(args []string) error {
 	return nil
 }
 
-func selectTasks(selected task.Status, tasks []*task.Task) []*task.Task{
+func selectTasks(selected task.Status, tasks []*task.Task) []*task.Task {
 	result := []*task.Task{}
 	for _, task := range tasks {
-		if task.GetStatus() == selected{
+		if task.GetStatus() == selected {
 			result = append(result, task)
 		}
 	}

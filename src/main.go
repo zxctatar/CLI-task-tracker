@@ -29,11 +29,12 @@ func main() {
 	emptyVal := validator.EmptyValudator{}
 	minMaxOneVal := validator.NewMinMaxNumberValidator(1, 1) // for DeleteCommand, StartCommand, DoneCommand, CancelCommand
 	minVal := validator.NewMinValidator(2)                   // for UpdateCommand
+	minMaxVal := validator.NewMinMaxValidator(0, 1)          // for ListCommand
 
 	//Commands
 	add := command.NewAddCommand(taskStor, &notEmptyVal)
 	exit := command.NewExitCommand(&emptyVal)
-	list := command.NewListCommand(taskStor, &emptyVal)
+	list := command.NewListCommand(taskStor, minMaxVal)
 	delete := command.NewDeleteCommand(taskStor, minMaxOneVal)
 	update := command.NewUpdateCommand(taskStor, minVal)
 	start := command.NewStartCommand(taskStor, minMaxOneVal)
