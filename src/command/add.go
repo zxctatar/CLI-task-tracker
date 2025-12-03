@@ -5,7 +5,6 @@ import (
 	"CLI-task-tracker/utils"
 	"CLI-task-tracker/validator"
 	"strings"
-	"time"
 )
 
 type AddCommand struct {
@@ -33,6 +32,6 @@ func (ac *AddCommand) Execute(args []string) error {
 	var title string = strings.Join(args, " ")
 
 	ac.stor.AddTask(title, formattedDateTime)
-
+	
 	return nil
 }
