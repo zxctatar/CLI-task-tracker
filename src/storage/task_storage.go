@@ -32,14 +32,14 @@ func (ts *TaskStorage) DeleteTask(id int) error {
 	return errors.New("task with this id not found")
 }
 
-func (ts *TaskStorage) UpdateTask(id int, newTitle string, newLastUpdateTime string) error {
+func (ts *TaskStorage) UpdateTask(id int, newDescription string, newLastUpdateTime string) error {
 	t, err := ts.findById(id)
 
 	if err != nil {
 		return err
 	}
 
-	t.SetTitle(newTitle)
+	t.SetDescription(newDescription)
 	t.SetLastUpdateTime(newLastUpdateTime)
 
 	return nil
