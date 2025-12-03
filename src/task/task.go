@@ -56,3 +56,7 @@ func (t* Task) SetTitle(newTitle string) {
 func (t* Task) SetLastUpdateTime(newLastUpdateTime string) {
 	t.LastUpdateTime = newLastUpdateTime
 }
+
+func (t* Task) StartTask() {
+	t.Stat = Started
+}
