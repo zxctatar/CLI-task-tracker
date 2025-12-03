@@ -7,7 +7,7 @@ import (
 )
 
 type TaskStorage struct {
-	tasks []*task.Task
+	tasks  []*task.Task
 	nextId int
 }
 
@@ -25,7 +25,7 @@ func (ts *TaskStorage) AddTask(title string, dateTime string) {
 func (ts *TaskStorage) DeleteTask(id int) error {
 	for index, t := range ts.tasks {
 		if t.GetId() == id {
-			ts.tasks = slices.Delete(ts.tasks, index, index + 1)
+			ts.tasks = slices.Delete(ts.tasks, index, index+1)
 			return nil
 		}
 	}
@@ -98,9 +98,9 @@ func findLastId(tasks []*task.Task) int {
 	}
 
 	return maxId + 1
-} 
+}
 
-func (ts* TaskStorage) findById(id int) (*task.Task, error) {
+func (ts *TaskStorage) findById(id int) (*task.Task, error) {
 	for _, t := range ts.tasks {
 		if t.GetId() == id {
 			return t, nil

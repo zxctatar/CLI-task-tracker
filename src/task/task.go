@@ -4,10 +4,14 @@ type Status int
 
 func (s Status) String() string {
 	switch s {
-	case 0: return "Not started "
-	case 1: return "Started"
-	case 2: return "Done"
-	default: return "Unknown"
+	case 0:
+		return "Not started "
+	case 1:
+		return "Started"
+	case 2:
+		return "Done"
+	default:
+		return "Unknown"
 	}
 }
 
@@ -18,11 +22,11 @@ const (
 )
 
 type Task struct {
-	Id int `json:"id"`
-	Description string `json:"title"`
-	CreatedTime string `json:"dateTime"`
+	Id             int    `json:"id"`
+	Description    string `json:"title"`
+	CreatedTime    string `json:"dateTime"`
 	LastUpdateTime string `json:"lastUpdate"`
-	Stat Status `json:"status"`
+	Stat           Status `json:"status"`
 }
 
 func NewTask(id int, title string, createdTime string, lastUpdateTime string, stat Status) *Task {

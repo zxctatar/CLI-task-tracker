@@ -10,12 +10,12 @@ import (
 )
 
 type UpdateCommand struct {
-	name string
-	stor *storage.TaskStorage
-	val validator.Validator
+	name        string
+	stor        *storage.TaskStorage
+	val         validator.Validator
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewUpdateCommand(stor *storage.TaskStorage, val validator.Validator) *UpdateCommand {

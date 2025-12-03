@@ -11,12 +11,12 @@ import (
 )
 
 type ListCommand struct {
-	name string
-	stor *storage.TaskStorage
-	val validator.Validator
+	name        string
+	stor        *storage.TaskStorage
+	val         validator.Validator
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewListCommand(stor *storage.TaskStorage, val validator.Validator) *ListCommand {
@@ -86,7 +86,7 @@ func (lc *ListCommand) Execute(args []string) error {
 	return nil
 }
 
-func getListFieldSizes(tasks []*task.Task) (idLen, descriptionLen, createdTimeLen, lastUpdateTimeLen, statLen int){
+func getListFieldSizes(tasks []*task.Task) (idLen, descriptionLen, createdTimeLen, lastUpdateTimeLen, statLen int) {
 	idLen = 2
 	descriptionLen = 11
 	createdTimeLen = 10
@@ -98,7 +98,7 @@ func getListFieldSizes(tasks []*task.Task) (idLen, descriptionLen, createdTimeLe
 		if idLen < len(idStr) {
 			idLen = len(idStr)
 		}
-		
+
 		descriptionRun := []rune(t.GetDescription())
 
 		if descriptionLen < len(descriptionRun) {

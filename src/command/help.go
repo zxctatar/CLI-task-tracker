@@ -8,12 +8,12 @@ import (
 )
 
 type HelpCommand struct {
-	name string
-	val validator.Validator
-	commands []Command
+	name        string
+	val         validator.Validator
+	commands    []Command
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewHelpCommand(val validator.Validator) *HelpCommand {
@@ -23,11 +23,11 @@ func NewHelpCommand(val validator.Validator) *HelpCommand {
 	example := "help"
 
 	return &HelpCommand{
-		name: name,
-		val: val, 
+		name:        name,
+		val:         val,
 		description: description,
-		usage: usage,
-		example: example,
+		usage:       usage,
+		example:     example,
 	}
 }
 

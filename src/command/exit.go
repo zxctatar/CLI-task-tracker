@@ -8,11 +8,11 @@ import (
 var ErrExit error = errors.New("exit")
 
 type ExitCommand struct {
-	name string
-	val validator.Validator
+	name        string
+	val         validator.Validator
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewExitCommand(val validator.Validator) *ExitCommand {

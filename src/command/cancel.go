@@ -9,12 +9,12 @@ import (
 )
 
 type CancelCommand struct {
-	name string
-	stor *storage.TaskStorage
-	val validator.Validator
+	name        string
+	stor        *storage.TaskStorage
+	val         validator.Validator
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewCancelCommand(stor *storage.TaskStorage, val validator.Validator) *CancelCommand {

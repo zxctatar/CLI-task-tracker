@@ -10,7 +10,7 @@ import (
 )
 
 type Manager struct {
-	commandsMap map[string]command.Command
+	commandsMap  map[string]command.Command
 	commandSlice []command.Command
 }
 
@@ -73,6 +73,9 @@ func (m *Manager) Run() {
 				continue
 			}
 			fmt.Println(err.Error())
+			continue
 		}
+
+		fmt.Println("OK")
 	}
 }

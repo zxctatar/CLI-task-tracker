@@ -8,12 +8,12 @@ import (
 )
 
 type DeleteCommand struct {
-	name string
-	stor *storage.TaskStorage
-	val validator.Validator
+	name        string
+	stor        *storage.TaskStorage
+	val         validator.Validator
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewDeleteCommand(stor *storage.TaskStorage, val validator.Validator) *DeleteCommand {

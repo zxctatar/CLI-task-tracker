@@ -8,12 +8,12 @@ import (
 )
 
 type AddCommand struct {
-	name string
-	stor *storage.TaskStorage
-	val validator.Validator
+	name        string
+	stor        *storage.TaskStorage
+	val         validator.Validator
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewAddCommand(stor *storage.TaskStorage, val validator.Validator) *AddCommand {
@@ -36,11 +36,11 @@ func (ac *AddCommand) GetDescription() string {
 	return ac.description
 }
 
-func(ac *AddCommand) GetUsage() string {
+func (ac *AddCommand) GetUsage() string {
 	return ac.usage
 }
 
-func(ac *AddCommand) GetExample() string {
+func (ac *AddCommand) GetExample() string {
 	return ac.example
 }
 
@@ -50,6 +50,6 @@ func (ac *AddCommand) Execute(args []string) error {
 	var title string = strings.Join(args, " ")
 
 	ac.stor.AddTask(title, formattedDateTime)
-	
+
 	return nil
 }

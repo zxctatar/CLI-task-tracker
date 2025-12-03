@@ -2,7 +2,7 @@ package validator
 
 import "errors"
 
-type NotEmptyValidator struct {}
+type NotEmptyValidator struct{}
 
 func (nev *NotEmptyValidator) Check(args []string) error {
 	if len(args) == 0 {

@@ -38,7 +38,7 @@ func (js *JsonStorage) Load() ([]*task.Task, error) {
 	}
 
 	var tasks []*task.Task
-	
+
 	err = json.Unmarshal(data, &tasks)
 
 	if err != nil {

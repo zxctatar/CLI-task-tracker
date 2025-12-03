@@ -9,12 +9,12 @@ import (
 )
 
 type StartCommand struct {
-	name string
-	stor *storage.TaskStorage
-	val validator.Validator
+	name        string
+	stor        *storage.TaskStorage
+	val         validator.Validator
 	description string
-	usage string
-	example string
+	usage       string
+	example     string
 }
 
 func NewStartCommand(stor *storage.TaskStorage, val validator.Validator) *StartCommand {

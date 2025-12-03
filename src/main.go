@@ -20,15 +20,15 @@ func main() {
 	//TaskStorage
 	taskStor := storage.NewTaskStorage(tasks)
 
-	defer func ()  {
-		jsonStor.Save(taskStor.GetTasks())	
+	defer func() {
+		jsonStor.Save(taskStor.GetTasks())
 	}()
 
 	//Validators
 	notEmptyVal := validator.NotEmptyValidator{}
 	emptyVal := validator.EmptyValudator{}
 	minMaxOneVal := validator.NewMinMaxNumberValidator(1, 1) // for DeleteCommand, StartCommand, DoneCommand, CancelCommand
-	minVal := validator.NewMinValidator(2) // for UpdateCommand
+	minVal := validator.NewMinValidator(2)                   // for UpdateCommand
 
 	//Commands
 	add := command.NewAddCommand(taskStor, &notEmptyVal)
