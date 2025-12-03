@@ -33,14 +33,29 @@ func (ts *TaskStorage) DeleteTask(id int) error {
 }
 
 func (ts *TaskStorage) UpdateTask(id int, newTitle string, newLastUpdateTime string) error {
-	for _, t := range ts.tasks {
-		if t.GetId() == id {
-			t.SetTitle(newTitle)
-			t.SetLastUpdateTime(newLastUpdateTime)
-			return nil
-		}
+	t, err := ts.findById(id)
+
+	if err != nil {
+		return err
 	}
-	return errors.New("task with this id not found")
+
+	t.SetTitle(newTitle)
+	t.SetLastUpdateTime(newLastUpdateTime)
+
+	return nil
+}
+
+func (ts *TaskStorage) StartTask(id int, newLastUpdateTime string) error {
+	t, err := ts.findById(id)
+
+	if err != nil {
+		return err
+	}
+
+	t.StartTask()
+	t.SetLastUpdateTime(newLastUpdateTime)
+
+	return nil
 }
 
 func (ts *TaskStorage) GetTasks() []*task.Task {
@@ -58,3 +73,12 @@ func findLastId(tasks []*task.Task) int {
 
 	return maxId + 1
 } 
+
+func (ts* TaskStorage) findById(id int) (*task.Task, error) {
+	for _, t := range ts.tasks {
+		if t.GetId() == id {
+			return t, nil
+		}
+	}
+	return nil, errors.New("task with this id not found")
+}
