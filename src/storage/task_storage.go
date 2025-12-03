@@ -58,6 +58,32 @@ func (ts *TaskStorage) StartTask(id int, newLastUpdateTime string) error {
 	return nil
 }
 
+func (ts *TaskStorage) DoneTask(id int, newLastUpdateTime string) error {
+	t, err := ts.findById(id)
+
+	if err != nil {
+		return err
+	}
+
+	t.DoneTask()
+	t.SetLastUpdateTime(newLastUpdateTime)
+
+	return nil
+}
+
+func (ts *TaskStorage) CancelTask(id int, newLastUpdateTime string) error {
+	t, err := ts.findById(id)
+
+	if err != nil {
+		return err
+	}
+
+	t.CancelTask()
+	t.SetLastUpdateTime(newLastUpdateTime)
+
+	return nil
+}
+
 func (ts *TaskStorage) GetTasks() []*task.Task {
 	return ts.tasks
 }
